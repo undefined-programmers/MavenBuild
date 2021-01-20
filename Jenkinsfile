@@ -4,9 +4,9 @@ node('master') {
 	}
 	
 	stage ('Build'){
-		 withMaven {
+		
 		sh "mvn clean install -Dmaven.test.skip=true"
-		 }
+		
 	}
 
 	stage ('Test Cases Execution'){
