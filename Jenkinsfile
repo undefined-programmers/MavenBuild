@@ -1,4 +1,9 @@
-node('master') {
+pipeline{
+	agent any
+	environment{
+	PATH = "C:\Program Files\Apache Maven 3.6.3\bin:$PATH"
+	}
+	stages{
 	stage ('checkout code'){
 		checkout scm
 	}
@@ -32,4 +37,5 @@ node('master') {
 		      to: "sathy2812@gmail.com"
 		    )
 	}
+}
 }
