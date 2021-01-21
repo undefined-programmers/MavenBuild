@@ -1,7 +1,7 @@
 pipeline{
 	agent any
 	environment{
-	PATH = "C:\Program Files\Apache Maven 3.6.3\bin:$PATH"
+	PATH = "/Program Files/Apache Maven 3.6.3/bin:$PATH"
 	}
 	stages{
 	stage ('checkout code'){
