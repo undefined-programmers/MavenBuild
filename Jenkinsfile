@@ -1,25 +1,18 @@
-pipeline{
-	agent any
-	environment{
-	PATH = "/Program Files/Apache Maven 3.6.3/bin:$PATH"
-	}
-	stages{
+node('master') {
 	stage ('checkout code'){
 		checkout scm
 	}
 	
 	stage ('Build'){
-		
 		sh "mvn clean install -Dmaven.test.skip=true"
-		
 	}
 
 	stage ('Test Cases Execution'){
-		cmd "mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test"
+		sh "mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test"
 	}
 
 	stage ('Sonar Analysis'){
-		cmd 'mvn sonar:sonar -Dsonar.host.url=http://localhost:9090 -Dsonar.login=89cbf1e129ee5be1f9285762551832d4a624b90e'
+		sh 'mvn sonar:sonar -Dsonar.host.url=http://localhost:9090 -Dsonar.login=89cbf1e129ee5be1f9285762551832d4a624b90e'
 	}
 
 	stage ('Archive Artifacts'){
@@ -37,5 +30,4 @@ pipeline{
 		      to: "sathy2812@gmail.com"
 		    )
 	}
-}
 }
